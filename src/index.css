@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 :root {
+  --app-bg: #f3f6fb;
+  --app-ink: #243042;
+  --app-muted: #64748b;
+  --font-body: "Gowun Dodum", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Gowun Dodum", system-ui, sans-serif;
   color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,7 +22,14 @@
 body {
   margin: 0;
   min-width: 320px;
-  background: #f7fbf2;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(1200px 600px at 10% -20%, #d9f3ff 0%, transparent 55%),
+    radial-gradient(760px 560px at 100% 0%, #e8ffe9 0%, transparent 60%),
+    var(--app-bg);
+  color: var(--app-ink);
+  font-family: var(--font-body);
 }
 
 button,
@@ -25,6 +37,23 @@ select,
 input,
 textarea {
   font: inherit;
+}
+
+h1,
+h2,
+h3,
+button,
+.duo-node {
+  font-family: var(--font-display);
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgba(28, 176, 246, 0.28);
+  outline-offset: 2px;
 }
 
 details > summary {

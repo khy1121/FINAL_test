@@ -505,9 +505,9 @@ function HomeScreen({
   const selected = configs.find((mode) => mode.id === activeMode) ?? configs[0];
 
   return (
-    <main className="min-h-screen bg-[#f7fbf2] pb-24 text-[#243042] lg:pb-0">
-      <header className="border-b-4 border-[#46a302] bg-[#58cc02] text-white">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <main className="min-h-screen bg-transparent pb-24 text-[#243042] lg:pb-0">
+      <header className="border-b-4 border-[#46a302] bg-gradient-to-r from-[#10b981] to-[#059669] text-white">
+        <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
           <div className="grid gap-5 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-wide text-white/80">Exam Trainer</p>
@@ -530,7 +530,7 @@ function HomeScreen({
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-5 sm:px-6 sm:py-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-6 lg:px-8">
+      <div className="mx-auto grid max-w-5xl gap-5 px-4 py-5 sm:px-6 sm:py-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6 lg:px-8">
         <section className="space-y-6">
           <section className="grid gap-3 sm:gap-4 md:grid-cols-2">
             {configs.map((mode) => (
@@ -684,9 +684,9 @@ function QuizScreen(props: QuizScreenProps) {
   const activeChapterLabel = chapter === "all" ? "전체 챕터" : chapterById.get(chapter)?.title ?? String(chapter);
 
   return (
-    <main className="min-h-screen bg-[#f7fbf2] pb-28 text-[#243042] sm:pb-0">
-      <header className="border-b-4 border-[#46a302] bg-[#58cc02] text-white">
-        <div className="mx-auto max-w-7xl px-3 py-3 sm:px-6 sm:py-4 lg:px-8">
+    <main className="min-h-screen bg-transparent pb-28 text-[#243042] sm:pb-0">
+      <header className="sticky top-0 z-40 border-b-4 border-[#46a302] bg-gradient-to-r from-[#10b981] to-[#059669] text-white shadow-[0_8px_18px_-12px_rgba(5,150,105,0.6)]">
+        <div className="mx-auto max-w-5xl px-3 py-3 sm:px-6 sm:py-4 lg:px-8">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-3">
               <button className="duo-secondary duo-press bg-white px-3 py-2 text-sm text-[#243042] sm:px-4" onClick={onGoHome} type="button">
@@ -711,7 +711,7 @@ function QuizScreen(props: QuizScreenProps) {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-4 px-3 py-4 sm:px-6 sm:py-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-6 lg:px-8">
+      <div className="mx-auto grid max-w-5xl gap-4 px-3 py-4 sm:px-6 sm:py-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-6 lg:px-8">
         <section className="lg:hidden">
           <details className="duo-card p-4">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-black">
@@ -1078,7 +1078,7 @@ function ResultScreen({
   onNewQuick: () => void;
 }) {
   return (
-    <main className="min-h-screen bg-[#f7fbf2] px-4 py-10 text-[#243042]">
+    <main className="min-h-screen bg-transparent px-4 py-10 text-[#243042]">
       <section className="duo-card mx-auto max-w-3xl p-6 text-center md:p-10">
         <p className="text-sm font-black uppercase text-[#58cc02]">Session Result</p>
         <h1 className="mt-2 text-4xl font-black">{mode.title} 완료</h1>
@@ -1130,7 +1130,7 @@ function ReviewScreen({
   onToggleBookmark: (questionId: string) => void;
 }) {
   return (
-    <main className="min-h-screen bg-[#f7fbf2] text-[#243042]">
+    <main className="min-h-screen bg-transparent text-[#243042]">
       <PageHeader title="오답과 북마크" subtitle={`${subjectLabels[activeSubject]} · ${mode.title}`} onGoHome={onGoHome}>
         <button className="duo-primary duo-press px-4 py-2 text-sm" disabled={!reviewQuestions.length} onClick={onStartReview} type="button">
           복습 세션 시작
@@ -1184,7 +1184,7 @@ function NotesScreen({
   onQueryChange: (value: string) => void;
 }) {
   return (
-    <main className="min-h-screen bg-[#f7fbf2] text-[#243042]">
+    <main className="min-h-screen bg-transparent text-[#243042]">
       <PageHeader title="노트와 시험표" subtitle={`${subjectLabels[activeSubject]} 원본 자료 검색`} onGoHome={onGoHome}>
         <input
           className="duo-input min-w-0 px-4 py-2.5 text-sm font-bold text-[#243042]"
@@ -1212,8 +1212,8 @@ function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="border-b-4 border-[#46a302] bg-[#58cc02] text-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+    <header className="sticky top-0 z-40 border-b-4 border-[#46a302] bg-gradient-to-r from-[#10b981] to-[#059669] text-white shadow-[0_8px_18px_-12px_rgba(5,150,105,0.6)]">
+      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
         <div className="flex items-center gap-3">
           <button className="duo-secondary duo-press bg-white px-4 py-2 text-sm text-[#243042]" onClick={onGoHome} type="button">
             홈
