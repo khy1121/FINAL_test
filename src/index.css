@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f7fbf2;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+.duo-card {
+  border: 2px solid #e1e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 4px 0 #d7e2ec;
+}
+
+.duo-card-active {
+  border-color: #58cc02;
+  background: #f1ffe8;
+  box-shadow: 0 4px 0 #46a302;
+}
+
+.duo-press {
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.duo-press:hover {
+  transform: translateY(-1px);
+}
+
+.duo-press:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #d7e2ec;
+}
+
+.duo-primary {
+  border: 2px solid #46a302;
+  border-radius: 8px;
+  background: #58cc02;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #46a302;
+  font-weight: 800;
+}
+
+.duo-primary:hover {
+  background: #61d80b;
+}
+
+.duo-primary:disabled {
+  border-color: #cbd5e1;
+  background: #dbe3ec;
+  box-shadow: 0 4px 0 #cbd5e1;
+  color: #64748b;
+}
+
+.duo-secondary {
+  border: 2px solid #d9e4ef;
+  border-radius: 8px;
+  background: #eef4fb;
+  color: #243042;
+  box-shadow: 0 4px 0 #d7e2ec;
+  font-weight: 800;
+}
+
+.duo-option {
+  border: 2px solid #d9e4ef;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 3px 0 #d7e2ec;
+}
+
+.duo-option:hover {
+  border-color: #84d8ff;
+  background: #f5fbff;
+}
+
+.duo-option-selected {
+  border-color: #1cb0f6;
+  background: #e8f6ff;
+  box-shadow: 0 3px 0 #84d8ff;
+}
+
+.duo-option-correct {
+  border-color: #58cc02;
+  background: #f1ffe8;
+  box-shadow: 0 3px 0 #46a302;
+}
+
+.duo-option-wrong {
+  border-color: #ff4b4b;
+  background: #fff0f0;
+  box-shadow: 0 3px 0 #ea2b2b;
+}
+
+.duo-input {
+  border: 2px solid #d9e4ef;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.duo-input:focus {
+  border-color: #1cb0f6;
+  box-shadow: 0 0 0 4px #dff4ff;
+  outline: none;
+}
+
+.duo-node {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #46a302;
+  border-radius: 999px;
+  background: #58cc02;
+  box-shadow: 0 4px 0 #46a302;
+  color: #ffffff;
+  font-weight: 900;
+}

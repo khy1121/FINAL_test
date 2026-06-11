@@ -1,0 +1,80 @@
+import type { Chapter, SubjectId } from "../types";
+
+export const chapters: Chapter[] = [
+  { id: "CH01", subject: "ios", title: "iOS 개발 환경 / MVC", weight: "기반", focus: "MVC, IBOutlet, IBAction" },
+  { id: "CH02", subject: "ios", title: "Swift / Optional", weight: "중요", focus: "Optional, Closure, Type Casting" },
+  { id: "CH03", subject: "ios", title: "View Hierarchy / Delegate", weight: "중요", focus: "생명주기, First Responder, Delegation" },
+  { id: "CH04", subject: "ios", title: "AutoLayout", weight: "중요", focus: "Safe Area, Hugging, Compression Resistance" },
+  { id: "CH05", subject: "ios", title: "Programming Layout", weight: "중요", focus: "Anchor, Constraint, StackView" },
+  { id: "CH06", subject: "ios", title: "TabBar / Navigation", weight: "중요", focus: "TabBar, PickerView, Segue, present" },
+  { id: "CH07", subject: "ios", title: "Thread & Web Services", weight: "매우 중요", focus: "Main Queue, URLSession, JSON" },
+  { id: "CH09", subject: "ios", title: "TableView & CollectionView", weight: "매우 중요", focus: "DataSource, Delegate, Cell 재사용" },
+  { id: "CH10", subject: "ios", title: "Master-Detail", weight: "매우 중요", focus: "UIImagePickerController, prepare, NotificationCenter" },
+  { id: "CH11", subject: "ios", title: "Firebase", weight: "매우 중요", focus: "Firestore, Storage, SnapshotListener" },
+  { id: "CH12", subject: "ios", title: "SwiftUI Views", weight: "매우 중요", focus: "View Protocol, some View, ForEach" },
+  { id: "CH13", subject: "ios", title: "SwiftUI Interaction", weight: "매우 중요", focus: "@State, @Binding, List, NavigationLink" },
+  { id: "CH14", subject: "ios", title: "SwiftUI Firebase", weight: "매우 중요", focus: "Firebase 초기화, ImagePool, 비동기 이미지" },
+
+  { id: "WF2_OVERVIEW", subject: "wf2", title: "Spring Boot 개요", weight: "기반", focus: "Boot를 쓰는 이유, opinionated 접근" },
+  { id: "WF2_AUTO_CONFIG", subject: "wf2", title: "Auto Configuration", weight: "매우 중요", focus: "classpath 스캔, 조건부 Bean, 개발자 설정 우선" },
+  { id: "WF2_STARTERS", subject: "wf2", title: "Starters", weight: "매우 중요", focus: "의존성 묶음, 버전 충돌 방지, BOM" },
+  { id: "WF2_EMBEDDED_SERVER", subject: "wf2", title: "내장 서버", weight: "중요", focus: "Tomcat, Jetty, fat jar, java -jar" },
+  { id: "WF2_ACTUATOR", subject: "wf2", title: "Actuator", weight: "매우 중요", focus: "health, loggers, endpoint 노출 설정" },
+  { id: "WF2_BEAN_CONFIG", subject: "wf2", title: "Bean 설정 방식", weight: "중요", focus: "XML, 어노테이션, Java Config" },
+  { id: "WF2_PROJECT_STRUCTURE", subject: "wf2", title: "프로젝트 구조", weight: "중요", focus: "src/main/java, static, templates, webapp 주의" },
+  { id: "WF2_POM_RUNTIME", subject: "wf2", title: "pom.xml / 실행 흐름", weight: "매우 중요", focus: "starter-parent, maven-plugin, 실행 순서" },
+];
+
+export const subjectLabels: Record<SubjectId, string> = {
+  ios: "iOS",
+  wf2: "웹프레임워크2",
+};
+
+export const topMemorizeBySubject: Record<SubjectId, string[]> = {
+  ios: [
+    "MVC에서 Model/View/Controller 역할",
+    "Optional, Optional Binding, as?, as!",
+    "Delegate 개념",
+    "Safe Area, Hugging, Compression Resistance",
+    "translatesAutoresizingMaskIntoConstraints = false",
+    "Main Thread에서 UI 업데이트",
+    "Sync/Async, Serial/Concurrent 차이",
+    "URLSession, URLRequest, Completion Handler",
+    "TableView DataSource 필수 함수",
+    "TableView Delegate 대표 함수",
+    "Cell 재사용과 subview 제거",
+    "TableView와 CollectionView 차이",
+    "UIImagePickerController와 delegate",
+    "NotificationCenter add/remove observer",
+    "Master-Detail에서 prepare(for:sender:)",
+    "배열/딕셔너리 값 복사 문제와 reference 전달",
+    "Firestore와 Storage 차이",
+    "이미지 upload completion 이후 Firestore 저장",
+    "SwiftUI의 @State와 @Binding",
+    "SwiftUI Firebase 비동기 이미지 로딩과 @State image",
+  ],
+  wf2: [
+    "Spring Boot = 스프링을 빠르고 쉽게 시작하기 위한 opinionated 도구",
+    "핵심 특징 = 자동 설정, Starters, 내장 서버, Actuator",
+    "@SpringBootApplication = @SpringBootConfiguration + @EnableAutoConfiguration + @ComponentScan",
+    "Auto Configuration = jar 추가 -> classpath 스캔 -> 조건 평가 -> Bean 등록",
+    "자동 설정은 개발자가 직접 등록한 Bean이 없을 때 적용된다.",
+    "application.properties로 자동 설정 값을 오버라이드할 수 있다.",
+    "Starter는 기능별 의존성 묶음이며 호환 버전을 함께 관리한다.",
+    "spring-boot-starter-web은 MVC 웹 기능과 내장 서버 구성을 가져온다.",
+    "spring-boot-starter-data-jpa는 JPA 관련 의존성을 묶는다.",
+    "내장 서버 기본은 Tomcat이며 jar 하나로 실행할 수 있다.",
+    "fat jar는 코드와 서버/라이브러리를 함께 담는다.",
+    "Actuator는 운영 상태 확인과 관리용 엔드포인트를 제공한다.",
+    "Actuator 기본 노출 엔드포인트는 health이다.",
+    "management.endpoints.web.exposure.include=* 는 모든 엔드포인트 노출이다.",
+    "exclude=env,shutdown처럼 일부 엔드포인트를 제외할 수 있다.",
+    "Bean 설정 방식 = XML, 어노테이션 기반, Java Config",
+    "src/main/java는 MVC 등 Java 코드 위치이다.",
+    "static은 이미지/CSS 같은 정적 파일 위치이다.",
+    "templates는 Thymeleaf 같은 서버 템플릿 위치이다.",
+    "src/main/webapp은 jar 패키징 시 무시될 수 있다.",
+  ],
+};
+
+export const topMemorize = topMemorizeBySubject.ios;
