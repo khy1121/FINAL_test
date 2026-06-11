@@ -505,22 +505,22 @@ function HomeScreen({
   const selected = configs.find((mode) => mode.id === activeMode) ?? configs[0];
 
   return (
-    <main className="min-h-screen bg-[#f7fbf2] text-[#243042]">
+    <main className="min-h-screen bg-[#f7fbf2] pb-24 text-[#243042] lg:pb-0">
       <header className="border-b-4 border-[#46a302] bg-[#58cc02] text-white">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          <div className="grid gap-5 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-wide text-white/80">Exam Trainer</p>
-              <h1 className="mt-2 text-4xl font-black tracking-normal text-white sm:text-5xl">
+              <h1 className="mt-2 text-3xl font-black tracking-normal text-white sm:text-5xl">
                 오늘 풀 시험지를 고르세요
               </h1>
-              <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-white/90">
+              <p className="mt-3 max-w-2xl text-sm font-semibold leading-6 text-white/90 sm:text-base sm:leading-7">
                 홈, 퀴즈, 결과, 복습, 노트가 분리된 학습 흐름으로 iOS와 웹프레임워크2를 반복 연습합니다.
               </p>
             </div>
-            <div className="duo-card bg-white p-5 text-[#243042]">
+            <div className="duo-card bg-white p-4 text-[#243042] sm:p-5">
               <p className="text-sm font-black text-slate-500">선택한 코스</p>
-              <h2 className="mt-2 text-2xl font-black">{selected.title}</h2>
+              <h2 className="mt-2 text-xl font-black sm:text-2xl">{selected.title}</h2>
               <p className="mt-2 text-sm font-bold leading-6 text-slate-500">{selected.subtitle}</p>
               <button className="duo-primary duo-press mt-5 w-full px-5 py-3 text-sm" onClick={() => onStartMode(selected.id)} type="button">
                 시작하기
@@ -530,22 +530,25 @@ function HomeScreen({
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-5 sm:px-6 sm:py-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-6 lg:px-8">
         <section className="space-y-6">
-          <section className="grid gap-4 md:grid-cols-2">
+          <section className="grid gap-3 sm:gap-4 md:grid-cols-2">
             {configs.map((mode) => (
               <button
                 key={mode.id}
-                className={cx("duo-card duo-press p-5 text-left", activeMode === mode.id && "duo-card-active")}
-                onClick={() => onSelectMode(mode.id)}
+                className={cx("duo-card duo-press p-4 text-left sm:p-5", activeMode === mode.id && "duo-card-active")}
+                onClick={() => {
+                  onSelectMode(mode.id);
+                  onStartMode(mode.id);
+                }}
                 type="button"
               >
                 <div className="flex items-center justify-between gap-3">
                   <Badge tone={mode.quick ? "amber" : "teal"}>{mode.label}</Badge>
                   <span className="text-sm font-black text-slate-500">{mode.quick ? "20~25문항" : "전체 문제"}</span>
                 </div>
-                <h2 className="mt-4 text-2xl font-black text-[#243042]">{mode.title}</h2>
-                <p className="mt-2 text-sm font-bold leading-6 text-slate-500">{mode.subtitle}</p>
+                <h2 className="mt-4 text-lg font-black leading-6 text-[#243042] sm:text-2xl">{mode.title}</h2>
+                <p className="mt-2 text-xs font-bold leading-5 text-slate-500 sm:text-sm sm:leading-6">{mode.subtitle}</p>
               </button>
             ))}
           </section>
@@ -601,6 +604,12 @@ function HomeScreen({
             </ul>
           </section>
         </aside>
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t-2 border-[#d9e4ef] bg-white/95 p-3 shadow-[0_-8px_20px_rgba(15,23,42,0.08)] backdrop-blur lg:hidden">
+        <button className="duo-primary duo-press w-full px-5 py-3 text-sm" onClick={() => onStartMode(selected.id)} type="button">
+          선택한 퀴즈 바로 풀기
+        </button>
       </div>
     </main>
   );
@@ -672,22 +681,23 @@ function QuizScreen(props: QuizScreenProps) {
     subjectChapters,
   } = props;
   const progressPercent = Math.round(((index + 1) / Math.max(filteredQuestions.length, 1)) * 100);
+  const activeChapterLabel = chapter === "all" ? "전체 챕터" : chapterById.get(chapter)?.title ?? String(chapter);
 
   return (
-    <main className="min-h-screen bg-[#f7fbf2] text-[#243042]">
+    <main className="min-h-screen bg-[#f7fbf2] pb-28 text-[#243042] sm:pb-0">
       <header className="border-b-4 border-[#46a302] bg-[#58cc02] text-white">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mx-auto max-w-7xl px-3 py-3 sm:px-6 sm:py-4 lg:px-8">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-3">
-              <button className="duo-secondary duo-press bg-white px-4 py-2 text-sm text-[#243042]" onClick={onGoHome} type="button">
+              <button className="duo-secondary duo-press bg-white px-3 py-2 text-sm text-[#243042] sm:px-4" onClick={onGoHome} type="button">
                 홈
               </button>
               <div>
                 <p className="text-xs font-black uppercase text-white/80">{subjectLabels[activeSubject]}</p>
-                <h1 className="text-xl font-black text-white">{quizSource === "review" ? "복습 세션" : mode.title}</h1>
+                <h1 className="text-base font-black leading-6 text-white sm:text-xl">{quizSource === "review" ? "복습 세션" : mode.title}</h1>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
+            <div className="flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible sm:pb-0">
               <Stat label="진행" value={`${index + 1}/${filteredQuestions.length || 0}`} />
               <Stat label="세션 정답" value={String(sessionSummary.correct)} />
               <Stat label="세션 오답" value={String(sessionSummary.wrong)} tone="rose" />
@@ -695,14 +705,73 @@ function QuizScreen(props: QuizScreenProps) {
               <Stat label="북마크" value={String(modeStats.bookmarked)} tone="amber" />
             </div>
           </div>
-          <div className="mt-4 h-4 overflow-hidden rounded-full bg-white/30">
+          <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/30 sm:mt-4 sm:h-4">
             <div className="h-full rounded-full bg-white" style={{ width: `${progressPercent}%` }} />
           </div>
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:px-8">
-        <aside className="space-y-4 lg:sticky lg:top-5 lg:self-start">
+      <div className="mx-auto grid max-w-7xl gap-4 px-3 py-4 sm:px-6 sm:py-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-6 lg:px-8">
+        <section className="lg:hidden">
+          <details className="duo-card p-4">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-black">
+              <span>필터 / 챕터</span>
+              <span className="min-w-0 truncate rounded-md border-2 border-slate-100 bg-[#f7fbf2] px-2.5 py-1 text-xs text-slate-600">
+                {activeChapterLabel}
+              </span>
+            </summary>
+            <div className="mt-4 grid gap-3">
+              <Select label="챕터" value={chapter} onChange={(value) => onChapterChange(value as FilterValue<ChapterId>)}>
+                <option value="all">전체 챕터</option>
+                {subjectChapters.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.title}
+                  </option>
+                ))}
+              </Select>
+              <Select label="유형" value={kind} onChange={(value) => onKindChange(value as FilterValue<QuestionKind>)}>
+                <option value="all">전체 유형</option>
+                {visibleKinds.map((value) => (
+                  <option key={value} value={value}>
+                    {kindLabels[value]}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                label="중요도"
+                value={String(priority)}
+                onChange={(value) => onPriorityChange(value === "all" ? "all" : (Number(value) as Priority))}
+              >
+                <option value="all">전체 중요도</option>
+                <option value="3">최중요</option>
+                <option value="2">중요</option>
+                <option value="1">기본</option>
+              </Select>
+              <input
+                className="duo-input px-3 py-3 text-base font-bold sm:text-sm"
+                onChange={(event) => onQueryChange(event.target.value)}
+                placeholder="검색"
+                value={query}
+              />
+            </div>
+          </details>
+
+          <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+            {mode.quick && quizSource === "normal" && (
+              <button className="duo-secondary duo-press shrink-0 px-3 py-2.5 text-sm" onClick={onRegenerate} type="button">
+                새 시험지
+              </button>
+            )}
+            <button className="duo-secondary duo-press shrink-0 px-3 py-2.5 text-sm" onClick={onReview} type="button">
+              복습 목록
+            </button>
+            <button className="duo-secondary duo-press shrink-0 px-3 py-2.5 text-sm" onClick={onFinish} type="button">
+              결과 보기
+            </button>
+          </div>
+        </section>
+
+        <aside className="hidden space-y-4 lg:sticky lg:top-5 lg:block lg:self-start">
           <section className="duo-card p-4">
             <div className="flex items-center justify-between gap-2">
               <h2 className="text-sm font-black">필터</h2>
@@ -781,8 +850,8 @@ function QuizScreen(props: QuizScreenProps) {
           </section>
         </aside>
 
-        <section className="min-w-0 space-y-5">
-          <div className="duo-card flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <section className="min-w-0 space-y-4 sm:space-y-5">
+          <div className="duo-card hidden flex-col gap-4 p-4 sm:flex sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-lg font-black">{quizSource === "review" ? "오답과 북마크만 풀기" : mode.subtitle}</h2>
               <p className="mt-1 text-sm font-semibold text-slate-500">
@@ -866,8 +935,8 @@ function QuestionView(props: QuestionViewProps) {
       (current.kind === "short" && textAnswer.trim().length > 0));
 
   return (
-    <article className="duo-card p-6 md:p-8">
-      <div className="flex flex-wrap items-start justify-between gap-3">
+    <article className="duo-card mobile-quiz-card p-4 sm:p-6 md:p-8">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="mb-3 flex flex-wrap gap-2">
             <Badge>{chapterById.get(current.chapter)?.title ?? current.chapter}</Badge>
@@ -878,14 +947,14 @@ function QuestionView(props: QuestionViewProps) {
             {state?.bookmarked && <Badge tone="amber">북마크</Badge>}
             {result === "wrong" && <Badge tone="rose">오답</Badge>}
           </div>
-          <h2 className="max-w-4xl text-2xl font-black leading-9">{current.prompt}</h2>
+          <h2 className="max-w-4xl text-xl font-black leading-8 sm:text-2xl sm:leading-9">{current.prompt}</h2>
         </div>
-        <button className="duo-secondary duo-press px-3 py-2 text-sm" onClick={props.onBookmark} type="button">
+        <button className="duo-secondary duo-press w-full px-3 py-2.5 text-sm sm:w-auto sm:py-2" onClick={props.onBookmark} type="button">
           {state?.bookmarked ? "북마크 해제" : "북마크"}
         </button>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-5 sm:mt-6">
         {current.kind === "choice" && (
           <div className="grid gap-3">
             {current.options.map((option, optionIndex) => {
@@ -896,7 +965,7 @@ function QuestionView(props: QuestionViewProps) {
                 <button
                   key={option}
                   className={cx(
-                    "duo-option duo-press p-4 text-left text-base font-bold leading-7",
+                    "duo-option duo-press flex min-h-[64px] w-full items-start p-3 text-left text-sm font-bold leading-6 sm:p-4 sm:text-base sm:leading-7",
                     selected && "duo-option-selected",
                     correct && "duo-option-correct",
                     wrong && "duo-option-wrong",
@@ -905,7 +974,7 @@ function QuestionView(props: QuestionViewProps) {
                   onClick={() => props.onChoice(optionIndex)}
                   type="button"
                 >
-                  <span className="mr-3 inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#eef4fb] text-sm font-black text-slate-600">
+                  <span className="mr-3 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#eef4fb] text-sm font-black text-slate-600">
                     {String.fromCharCode(65 + optionIndex)}
                   </span>
                   <span>{option}</span>
@@ -921,7 +990,7 @@ function QuestionView(props: QuestionViewProps) {
               <button
                 key={String(value)}
                 className={cx(
-                  "duo-option duo-press p-5 text-lg font-black",
+                  "duo-option duo-press min-h-[72px] p-5 text-lg font-black",
                   truth === value && "duo-option-selected",
                   revealed && value === current.answer && "duo-option-correct",
                   revealed && truth === value && value !== current.answer && "duo-option-wrong",
@@ -954,14 +1023,14 @@ function QuestionView(props: QuestionViewProps) {
               placeholder="답안을 작성하세요"
               value={textAnswer}
             />
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button className="duo-secondary duo-press px-4 py-2 text-sm" onClick={props.onEssayReveal} type="button">
+            <div className="mt-3 grid gap-2 sm:flex sm:flex-wrap">
+              <button className="duo-secondary duo-press px-4 py-3 text-sm sm:py-2" onClick={props.onEssayReveal} type="button">
                 모범 답안 보기
               </button>
-              <button className="duo-primary duo-press px-4 py-2 text-sm" onClick={props.onEssayCorrect} type="button">
+              <button className="duo-primary duo-press px-4 py-3 text-sm sm:py-2" onClick={props.onEssayCorrect} type="button">
                 맞음으로 기록
               </button>
-              <button className="duo-secondary duo-press px-4 py-2 text-sm" onClick={props.onEssayWrong} type="button">
+              <button className="duo-secondary duo-press px-4 py-3 text-sm sm:py-2" onClick={props.onEssayWrong} type="button">
                 다시 볼 문제
               </button>
             </div>
@@ -971,20 +1040,20 @@ function QuestionView(props: QuestionViewProps) {
 
       {revealed && <Answer current={current} result={result} />}
 
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t-2 border-slate-100 pt-5">
-        <p className="text-sm font-bold text-slate-500">
+      <div className="mobile-answer-bar fixed inset-x-0 bottom-0 z-30 mt-0 flex flex-col gap-3 border-t-2 border-slate-100 bg-white p-3 shadow-[0_-8px_20px_rgba(15,23,42,0.08)] sm:static sm:mt-6 sm:flex-row sm:items-center sm:justify-between sm:bg-transparent sm:p-0 sm:pt-5 sm:shadow-none">
+        <p className="text-center text-xs font-bold text-slate-500 sm:text-left sm:text-sm">
           {index + 1}/{total} · 시도 {state?.attempts ?? 0}회 · 정답 {state?.correct ?? 0}회
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {!revealed && current.kind !== "essay" && (
-            <button className="duo-primary duo-press px-5 py-2.5 text-sm disabled:cursor-not-allowed" disabled={!canSubmit} onClick={props.onSubmit} type="button">
+            <button className="duo-primary duo-press col-span-2 px-5 py-3 text-sm disabled:cursor-not-allowed sm:col-span-1 sm:py-2.5" disabled={!canSubmit} onClick={props.onSubmit} type="button">
               확인
             </button>
           )}
-          <button className="duo-secondary duo-press px-4 py-2 text-sm disabled:opacity-50" disabled={index === 0} onClick={props.onMovePrevious} type="button">
+          <button className="duo-secondary duo-press px-4 py-3 text-sm disabled:opacity-50 sm:py-2" disabled={index === 0} onClick={props.onMovePrevious} type="button">
             이전
           </button>
-          <button className="duo-primary duo-press px-5 py-2 text-sm" onClick={props.onMoveNext} type="button">
+          <button className="duo-primary duo-press px-5 py-3 text-sm sm:py-2" onClick={props.onMoveNext} type="button">
             {index >= total - 1 ? "결과 보기" : revealed ? "다음 문제" : "건너뛰기"}
           </button>
         </div>
